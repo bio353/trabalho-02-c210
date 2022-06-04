@@ -9,7 +9,7 @@ def clear_console():
 
 
 def pause():
-    input("\nPress ENTER to continue...")
+    input("\nAperte ENTER para continuar...")
 
 
 if __name__ == "__main__":
