@@ -50,54 +50,40 @@ if __name__ == "__main__":
     pressao.view()
 
     # REGRA -> Expressão X, Resultado Y
-    # Coluna 1
-    regra1 = control.Rule((velocidade["mb"] & massa["mp"]) |
-                          (velocidade["mb"] & massa["pe"]) |
-                          (velocidade["mb"] & massa["me"]),
-                          pressao["mi"])
-    regra2 = control.Rule((velocidade["mb"] & massa["gr"]) |
-                          (velocidade["mb"] & massa["mg"]),
-                          pressao["me"])
-    # Coluna 2
-    regra3 = control.Rule((velocidade["ba"] & massa["mp"]) |
-                          (velocidade["ba"] & massa["pe"]) |
-                          (velocidade["ba"] & massa["me"]),
-                          pressao["mi"])
-    regra4 = control.Rule((velocidade["ba"] & massa["gr"]) |
-                          (velocidade["ba"] & massa["mg"]),
-                          pressao["me"])
-    # Coluna 3
-    regra5 = control.Rule((velocidade["me"] & massa["mp"]) |
-                          (velocidade["me"] & massa["pe"]),
-                          pressao["mi"])
-    regra6 = control.Rule((velocidade["me"] & massa["me"]),
-                          pressao["me"])
-    regra7 = control.Rule((velocidade["me"] & massa["gr"]) |
-                          (velocidade["me"] & massa["mg"]),
-                          pressao["el"])
-    # Coluna 4
-    regra8 = control.Rule((velocidade["al"] & massa["mp"]) |
-                          (velocidade["al"] & massa["pe"]) |
-                          (velocidade["al"] & massa["me"]),
-                          pressao["me"])
-    regra9 = control.Rule((velocidade["al"] & massa["gr"]) |
-                          (velocidade["al"] & massa["mg"]),
-                          pressao["el"])
-    # Coluna 5
-    regra10 = control.Rule((velocidade["ma"] & massa["mp"]) |
-                           (velocidade["ma"] & massa["pe"]) |
-                           (velocidade["ma"] & massa["me"]),
-                           pressao["me"])
-    regra11 = control.Rule((velocidade["ma"] & massa["gr"]) |
-                           (velocidade["ma"] & massa["mg"]),
-                           pressao["el"])
+    regra1 = control.Rule(
+        (velocidade["mb"] & massa["mp"]) |
+        (velocidade["mb"] & massa["pe"]) |
+        (velocidade["mb"] & massa["me"]) |
+        (velocidade["ba"] & massa["me"]) |
+        (velocidade["ba"] & massa["mp"]) |
+        (velocidade["ba"] & massa["pe"]) |
+        (velocidade["me"] & massa["mp"]) |
+        (velocidade["me"] & massa["pe"]),
+        pressao["mi"])
+    regra2 = control.Rule(
+        (velocidade["mb"] & massa["gr"]) |
+        (velocidade["mb"] & massa["mg"]) |
+        (velocidade["ba"] & massa["gr"]) |
+        (velocidade["ba"] & massa["mg"]) |
+        (velocidade["me"] & massa["me"]) |
+        (velocidade["al"] & massa["mp"]) |
+        (velocidade["al"] & massa["pe"]) |
+        (velocidade["al"] & massa["me"]) |
+        (velocidade["ma"] & massa["mp"]) |
+        (velocidade["ma"] & massa["pe"]) |
+        (velocidade["ma"] & massa["me"]),
+        pressao["me"])
+    regra3 = control.Rule(
+        (velocidade["me"] & massa["gr"]) |
+        (velocidade["me"] & massa["mg"]) |
+        (velocidade["al"] & massa["gr"]) |
+        (velocidade["al"] & massa["mg"]) |
+        (velocidade["ma"] & massa["gr"]) |
+        (velocidade["ma"] & massa["mg"]),
+        pressao["el"])
 
     # Adicionando Regras ao Controle
-    pressao_controle = control.ControlSystem([regra1, regra2,
-                                              regra3, regra4,
-                                              regra5, regra6, regra7,
-                                              regra8, regra9,
-                                              regra10, regra11])
+    pressao_controle = control.ControlSystem([regra1, regra2, regra3])
 
     # Criando Sistema c/ o Controle de PressÃo
     sistema = control.ControlSystemSimulation(pressao_controle)
