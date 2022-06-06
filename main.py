@@ -54,9 +54,9 @@ if __name__ == "__main__":
         (velocidade["mb"] & massa["mp"]) |
         (velocidade["mb"] & massa["pe"]) |
         (velocidade["mb"] & massa["me"]) |
-        (velocidade["ba"] & massa["me"]) |
         (velocidade["ba"] & massa["mp"]) |
         (velocidade["ba"] & massa["pe"]) |
+        (velocidade["ba"] & massa["me"]) |
         (velocidade["me"] & massa["mp"]) |
         (velocidade["me"] & massa["pe"]),
         pressao["mi"])
